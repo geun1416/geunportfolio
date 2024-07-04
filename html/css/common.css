@@ -20,7 +20,7 @@ body{position:relative;}
 .row-column{display:flex;flex-direction: column;}
 .justify-content-center{justify-content: center;}
 /*헤더*/
-header{position:fixed;left:0;top:0;z-index: 999;width:100%;height:60px;display:flex;align-items:center;background-color:red;}
+header{position:fixed;left:0;top:0;z-index: 999;width:100%;height:60px;display:flex;align-items:center;}
 /* header.fixed{background:rgba(255, 220, 159, 0.5)} */
 header .logo a{font-size:2rem;font-weight:600;}
 .main_menu {display: flex;width:1200px;margin:0px auto;}
