@@ -9,55 +9,122 @@
  <link rel="stylesheet" href="css/common.css">
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
  <link rel="stylesheet" href="css/swiper.css">
- <link rel="stylesheet" href="css/slider.css">
  <link rel="stylesheet" href="css/all.min.css">
+ <link rel="stylesheet" href="css/animate.css">
  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+ 
  <!-- js -->
  <script src="js/jquery-3.6.0.min.js"></script>
  <script src="js/common.js"></script>
  <script src="js/swiper.js"></script>
- <script src="js/slider.js"></script>
+ <script src="js/wow.min.js"></script>
  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
- <title>Jieun`s portfolio</title>
+ <title>JIEUN`S WEB PORTFOLIO</title>
  </head>
 
 <script>
-
+  new WOW().init();
 </script>
 
 <body>
-
+  <a class="topBtn">
+    <i class="xi-arrow-up">up</i>
+  </a>
   <header>
-    <nav class="main_menu">
-      <ul>
-        <li><a href="#section1"><span>About</span></a></li>
-        <li><a href="#section2"><span>Project</span></a></li>
-      </ul>
-    </nav>
+    <div class="inner">
+      <h1><a href="">JIEUN`S WEB PORTFOLIO</a></h1>
+      <nav class="main_menu">
+        <ul>
+          <li><a href="#section2">ABOUT</a></li>
+          <li><a href="#section2">PROJECT</a></li>
+          <li><a href="">CONTACT</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
   <section id="section1">
-    <div class="mb">
+    <div class="main">
       <canvas id="canvas" class="bg-canvas"></canvas>
-      <p class="slide_txt on">
-        <span>K</span>
-        <span>I</span>
-        <span>M</span>
-        <span>J</span>
-        <span>I</span>
-        <span>E</span>
-        <span>U</span>
-        <span>N</span>
-      </p>
-      <div class="git">
-        <a href=""><i class="fa-brands fa-github"></i></a>
+      <div class="cont">
+        <div class="slide_txt on">
+          <span>K</span>
+          <span>I</span>
+          <span>M</span>
+          <span>J</span>
+          <span>I</span>
+          <span>E</span>
+          <span>U</span>
+          <span>N</span>
+        </div>
+        <span class="name wow fadeIn"  data-wow-delay="0.5s">
+          새로운 것을 시도하며 일상을 풍부하게 만듭니다.<br/>
+          문제를 창의적으로 해결하고, 도전에서 얻는 경험을 중요하게 생각합니다.<br/>
+          지속적으로 배우며 더 나은 방향으로 나아가고 있습니다.<br/>
+          감사합니다.
+        </span>
+        <div class="git wow fadeIn"  data-wow-delay="0.5s">
+          <a href="https://github.com/geun1416/geunportfolio" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
       </div>
+      <div class="wow fadeIn scroll_animation"  data-wow-delay="1s">
+        <a href="#section2" class="scroll_icon">
+          <span>SCROLL DOWN</span>
+          <span class="scroll_icon"><img src="img/scroll_icon.svg"/></span>
+        </a>
+       </div>
     </div>
   </section>
 
   <section id="section2">
-    <div class="" style="background:red;min-height:100vh;">
-      123123
+    <div class="welcome">
+      <span>WELCOME<br>MY<br>WEBSITE</span>
+    </div>
+    <div class="inner">
+      <h2 class="ti wow fadeInDown" data-wow-delay="0.5s">ABOUT ME</h2>
+      <div class="about">
+        <div class="meimg wow fadeInLeft" data-wow-delay="1s">
+          <div class="swiper meimg_slide">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide"><span><img src="img/me01.jpg"/></span></div>
+              <div class="swiper-slide"><span><img src="img/me02.jpg"/></span></div>
+              <div class="swiper-slide"><span><img src="img/me03.jpg"/></span></div>
+              <div class="swiper-slide"><span><img src="img/me04.jpg"/></span></div>
+              <div class="swiper-slide"><span><img src="img/me05.jpg"/></span></div>    
+            </div>
+          </div>
+        </div>
+        <div class="metxt  wow fadeInRight" data-wow-delay="1.5s">
+          <strong>
+            <b>김지은</b> KimJiEun
+            <span>안녕하세요! 웹 퍼블리셔 김지은입니다.</span>
+          </strong>
+          <p>
+            저는 일상에 변화를 주며 새로운 도전을 즐기고 있습니다.<br/>
+            창의적으로 문제를 해결하고, 도전에서 얻은 교훈을 소중히 여기며 성장하고 있습니다.<br/>
+            끊임없이 배우고 발전하며 더 나은 방향으로 나아가고 있습니다.
+            <br/><br/>
+            개인 및 기업과의 다양한 프로젝트에서 웹 디자인, 마크업, CSS 스타일링, 반응형 웹 제작을 경험했습니다.<br/>
+            이 과정에서 최신 웹 트렌드를 유지하며, 사용자의 요구를 충족시키는 웹 사이트를 만드는 데 열정을 쏟고 있습니다.<br/>
+            특히, 사용자의 직관적인 경험을 중시하며, 웹 사이트의 접근성과 유용성을 향상시키기 위해 지속적으로 연구하고 있습니다.
+            <br/><br/>
+            프로젝트의 성공을 위해 원활한 소통과 적극적인 피드백을 중시하며,<br/>
+            각 팀원의 아이디어를 존중하고 반영하는 과정에서 최상의 결과를 도출하고자 노력합니다.<br/>
+            또한, 변화하는 요구와 트렌드에 신속히 대응하기 위해 자주 학습하고,<br/>
+            혁신적인 솔루션을 제시하여 팀과 프로젝트의 성공에 기여하고 있습니다.
+            <br/><br/>
+            저는 새로운 기술을 습득하고, 다양한 도구를 활용하는 것에 흥미를 느끼며,<br/>
+            이를 통해 웹 퍼블리싱 분야의 전문가로서 성장해 나가고 있습니다.<br/>
+            항상 도전적인 자세로 웹 디자인과 개발에 임하며,<br/>
+            사용자에게 더욱 매력적이고 기능적인 웹 경험을 제공하기 위해 최선을 다하고 있습니다.
+          </p>
+
+        </div>
+      </div>
     </div>
   </section>
 

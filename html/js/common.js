@@ -1,37 +1,28 @@
 $(function() {
-
-  if( $("header").length ){
-      var jbOffset = $("header").offset();
-      $( window ).scroll( function() {
-          if ( $( document ).scrollTop() > jbOffset.top ) {
-              $( 'header' ).addClass( 'fixed' );
-          }
-          else {
-              $( 'header' ).removeClass( 'fixed' );
-          }
-      });
+  if ($("header").length) {
+    $(window).scroll(function() {
+      let scrollTop = $(document).scrollTop();
+      if (scrollTop > 800) {
+        $('header').addClass('fixed');
+      } else {
+        $('header').removeClass('fixed');
+      }
+    });
   }
 });
 
-$(function(){
-var topEle = $('#topBtn');
 
-topEle.on('click', function() {
-$('html, body').stop().animate({scrollTop: 0});
-});
-
-
-var topEle = $('#topBtn');
-
-topEle.on('click', function() {
-$('html, body').stop().animate({scrollTop: 0});
-});
-
-$('a[href*=#]').on('click', function(event){
-event.preventDefault();
-$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
-});
-
+$(function() { 
+  $('.topBtn').css('display','none');
+  $(window).scroll(function() { if ($(this).scrollTop() > 300) { 
+    $('.topBtn').fadeIn();
+      } else { 
+        $('.topBtn').fadeOut(); 
+      } 
+  });
+	$('.topBtn').click(function(){
+		$('html, body').animate({scrollTop:0},500);
+	});
 });
 
 
@@ -139,7 +130,7 @@ $(function(){
   function animation() {
       ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 0.8;
-      ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 1)';
+      ctx.fillStyle = 'hsla(' + hue + ', 64%, 3%, 1)';
       ctx.fillRect(0, 0, w, h)
     
     ctx.globalCompositeOperation = 'lighter';
@@ -158,6 +149,7 @@ $(function() {
   let isAnimating = false;
 
   function scrollToSection(target) {
+    // new WOW().init();
     if (isAnimating) return;
     isAnimating = true;
     $('html, body').animate({ scrollTop: $(target).offset().top }, 700, () => isAnimating = false);
@@ -176,5 +168,26 @@ $(function() {
   $('.main_menu a').on('click', function(e) {
     e.preventDefault();
     scrollToSection($(this).attr('href'));
+  });
+
+  $('.scroll_icon').on('click', function() {
+    scrollToSection('#section2');
+  });
+});
+
+$(function() {
+  var mySwiper = new Swiper('.meimg_slide', {
+    slidesPerView: 1, // 한 번에 표시할 슬라이드 수
+    loop: true, // 슬라이드 루프(무한 회전) 활성화
+    autoplay: {
+        delay: 2000, // 2초마다 자동 재생
+        disableOnInteraction: false // 사용자 상호 작용 후에도 자동 재생 유지
+    },
+    effect: 'fade', // 페이드 인/아웃 효과
+    direction: 'horizontal', // 슬라이드 방향 (수평)
+    touchRatio: 1, // 슬라이드 드래그 감도
+    mousewheel: false, // 마우스 휠로 슬라이드 이동 가능
+    centeredSlides: true, // 슬라이드 중앙 정렬
+    watchOverflow: true // 슬라이드가 화면을 넘어갈 때의 처리 설정
   });
 });

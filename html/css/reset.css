@@ -24,11 +24,12 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-  font-family: 'Rubik', 'Noto Sans KR', sans-serif;
-  font-style: normal;
-  font-weight:normal;
+  	/* font-family: 'Rubik', 'NanumSquareRound', sans-serif; */
+	font-family: 'Rubik', 'Noto Sans KR', sans-serif;
+  	font-style: normal;
+  	font-weight:300;
 	vertical-align: baseline;
-  letter-spacing:-0.3pt;
+  	letter-spacing:-0.3pt;
 	box-sizing: border-box;
 	word-break: keep-all;
 	word-wrap: break-word;
@@ -204,4 +205,5 @@ table {
 .width_9n {width:11.111111111111111111111% !important;}
 .width_10n {width:10% !important;}
 
-a{display:inline-block;text-decoration: none;color:inherit;}
+a{display:inline-block;text-decoration: none;color:inherit;cursor:pointer;}
+div, p, span{cursor:inherit;user-select: none;}
