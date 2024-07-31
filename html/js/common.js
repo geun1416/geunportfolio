@@ -149,21 +149,20 @@ $(function() {
   let isAnimating = false;
 
   function scrollToSection(target) {
-    // new WOW().init();
     if (isAnimating) return;
     isAnimating = true;
     $('html, body').animate({ scrollTop: $(target).offset().top }, 700, () => isAnimating = false);
   }
 
-  $(window).on('wheel', function(event) {
-    if (isAnimating) return;
-    let deltaY = event.originalEvent.deltaY;
-    if (deltaY > 0 && $(window).scrollTop() < $('#section2').offset().top) {
-      scrollToSection('#section2');
-    } else if (deltaY < 0 && $(window).scrollTop() > 0) {
-      scrollToSection('#section1');
-    }
-  });
+  // $(window).on('wheel', function(event) {
+  //   if (isAnimating) return;
+  //   let deltaY = event.originalEvent.deltaY;
+  //   if (deltaY > 0 && $(window).scrollTop() < $('#section2').offset().top) {
+  //     scrollToSection('#section2');
+  //   } else if (deltaY < 0 && $(window).scrollTop() > 0) {
+  //     scrollToSection('#section1');
+  //   }
+  // });
 
   $('.main_menu a').on('click', function(e) {
     e.preventDefault();

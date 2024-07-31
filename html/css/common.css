@@ -63,15 +63,17 @@ h2.ti{text-align:left;font-size:5rem;font-weight:bold;padding:50px 0;max-width:1
 .metxt strong b{font-size:1.5rem;font-weight:bold;margin-right:5px;}
 .metxt strong span{display:block;font-size:1.125rem;margin:10px 0;font-weight:400;}
 .welcome{position:absolute;height:700px;right:100px;top:150px;}
-.welcome span{display:block;font-size:8rem;text-align:right;font-weight:bold;line-height:1;animation: scrollText 10s linear ;color:rgba(240, 240, 240, 0.2)}
+.welcome span{display:block;font-size:8rem;text-align:right;font-weight:bold;line-height:1;animation: scrollText 20s linear infinite;color:rgba(240, 240, 240, 0.2)}
 @keyframes scrollText {
   0% {
-    transform: translateY(100%);
+    transform: translateY(150%);
   }
   100% {
-    transform: translateY(0%);
+    transform: translateY(-150%);
   }
 }
+
+#section3{min-height:100vh;}
 /* 스크롤바 설정*/
 *::-webkit-scrollbar{width: 6px;height:6px;}
 /* 스크롤바 막대 설정*/
