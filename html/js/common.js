@@ -1,3 +1,9 @@
+
+$(function() {
+   AOS.init();
+});
+
+
 $(function() {
   if ($("header").length) {
     $(window).scroll(function() {

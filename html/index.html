@@ -10,21 +10,23 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
  <link rel="stylesheet" href="css/swiper.css">
  <link rel="stylesheet" href="css/all.min.css">
- <link rel="stylesheet" href="css/animate.css">
+ <!--<link rel="stylesheet" href="css/animate.css">-->
+ <link rel="stylesheet" href="css/aos.css">
  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
  
  <!-- js -->
  <script src="js/jquery-3.6.0.min.js"></script>
  <script src="js/common.js"></script>
  <script src="js/swiper.js"></script>
- <script src="js/wow.min.js"></script>
+ <!--<script src="js/wow.min.js"></script>-->
+ <script src="js/aos.js"></script>
  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
  <title>JIEUN`S WEB PORTFOLIO</title>
  </head>
 
 <script>
-  new WOW().init();
+
 </script>
 
 <body>
@@ -37,7 +39,7 @@
       <nav class="main_menu">
         <ul>
           <li><a href="#section2">ABOUT</a></li>
-          <li><a href="#section2">PROJECT</a></li>
+          <li><a href="#section3">PROJECT</a></li>
           <li><a href="">CONTACT</a></li>
         </ul>
       </nav>
@@ -57,19 +59,19 @@
           <span>U</span>
           <span>N</span>
         </div>
-        <span class="name wow fadeIn"  data-wow-delay="0.5s">
+        <span class="name" data-aos="fade-in" data-aos-duration="3000">
           새로운 것을 시도하며 일상을 풍부하게 만듭니다.<br/>
           문제를 창의적으로 해결하고, 도전에서 얻는 경험을 중요하게 생각합니다.<br/>
           지속적으로 배우며 더 나은 방향으로 나아가고 있습니다.<br/>
           감사합니다.
         </span>
-        <div class="git wow fadeIn"  data-wow-delay="1s">
-          <a href="https://github.com/geun1416/geunportfolio" target="_blank">
+        <div class="git" data-aos="fade-in" data-aos-duration="3000" data-aos-delay="500">
+          <a href="https://github.com/geun1416" target="_blank">
             <i class="fa-brands fa-github"></i>
           </a>
         </div>
       </div>
-      <div class="wow fadeIn scroll_animation"  data-wow-delay="1.5s">
+      <div class="scroll_animation">
         <a href="#section2" class="scroll_icon">
           <span>SCROLL DOWN</span>
           <span class="scroll_icon"><img src="img/scroll_icon.svg"/></span>
@@ -83,9 +85,9 @@
       <span>WELCOME<br>MY<br>WEBSITE</span>
     </div>
     <div class="inner">
-      <h2 class="ti wow fadeInDown" data-wow-delay="0.5s">ABOUT ME</h2>
+      <h2 class="ti" data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">ABOUT ME</h2>
       <div class="about">
-        <div class="meimg wow fadeInLeft" data-wow-delay="1s">
+        <div class="meimg"  data-aos="fade-right" data-aos-duration="2000">
           <div class="swiper meimg_slide">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
@@ -98,7 +100,7 @@
             </div>
           </div>
         </div>
-        <div class="metxt  wow fadeInRight" data-wow-delay="1.5s">
+        <div class="metxt" data-aos="fade-left" data-aos-duration="2000" >
           <strong>
             <b>김지은</b> KimJiEun
             <span>안녕하세요! 웹 퍼블리셔 김지은입니다.</span>
@@ -125,16 +127,25 @@
         </div>
       </div>
     </div>
-    <div class="inner">      
-      <h2 class="ti wow fadeInDown" data-wow-delay="0.5s">HISTORY</h2>
-      <div class="history">
-
+    <div class="inner">
+      <h2 class="ti" data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">HISTORY</h2>
+      <div class="history" data-aos="fade-in" data-aos-duration="2000">
+        <ul class="list-txt">
+          <li><b>2016.10 - 2017.04</b>[NCS] UI/UX 웹표준기반 (스마트앱콘텐츠디자인) 실무과정 [그린컴퓨터아카데미]</li>
+          <li><b>2017.04 - 2017.07</b>웹 디자인, 웹 퍼블리싱 [(주)이프론트]</li>
+          <li><b>2017.10 - 2018.11</b>전단지 및 배너 홍보물 제작 [(주)스포애니 고척점]</li>
+          <li><b>2018.12 - 2019.12</b>웹 디자인, 웹 퍼블리싱 [(주)웨일즈소프트]</li>
+          <li><b>2019.01 - 2022.04</b>웹 디자인, 웹퍼블리싱 [(주)팔네트웍스]</li>
+        </ul>
       </div>
     </div>
   </section>
   <section id="section3">
     <div class="inner">
-        333
+      <h2 class="ti" data-aos="fade-down" data-aos-duration="2000" data-aos-delay="100">PROJECT</h2>
+      <div class="project" data-aos="fade-in" data-aos-duration="2000">
+
+      </div>
     </div>
   </section>
 
