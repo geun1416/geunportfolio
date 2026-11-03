@@ -1,0 +1,4 @@
+.contact { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: 120px 8vw; background: var(--color-bg); border-top: 1px solid var(--color-border); }
+.contact__label { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 16px; }
+.contact__title { font-family: var(--font-kr); font-weight: 700; font-size: clamp(1.75rem, 3.5vw, 3rem); }
+.contact__desc { font-family: var(--font-kr); font-size: 1rem; color: var(--color-text-muted); margin-top: 16px; }

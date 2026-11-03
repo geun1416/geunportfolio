@@ -1,0 +1,9 @@
+.theme-toggle { position: fixed; top: 36px; right: 48px; z-index: 50; display: flex; align-items: center; gap: 6px; padding: 6px 2px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.8rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-text-muted); }
+.theme-toggle__opt { transition: color 0.3s ease; }
+.theme-toggle__opt.is-active { color: var(--color-text); }
+.theme-toggle:hover .theme-toggle__opt:not(.is-active) { color: var(--color-accent); }
+.theme-toggle__sep { opacity: 0.5; }
+
+@media (max-width: 768px) {
+  .theme-toggle { top: 30px; right: 6vw; }
+}

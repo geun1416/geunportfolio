@@ -16,6 +16,8 @@ body {
   transition: background var(--transition-base), color var(--transition-base);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  word-break: keep-all; /* 한글 단어 중간 줄바꿈 방지 */
+  overflow-wrap: anywhere;
 }
 
 a {

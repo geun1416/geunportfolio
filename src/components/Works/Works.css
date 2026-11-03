@@ -1,0 +1,3 @@
+.works { min-height: 100vh; padding: 160px 8vw; background: var(--color-bg); }
+.works__label { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 16px; }
+.works__title { font-family: var(--font-kr); font-weight: 700; font-size: clamp(1.75rem, 3vw, 2.75rem); }
