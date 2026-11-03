@@ -50,9 +50,9 @@ function WorkPanel({ work, workIndex, detail }: Props) {
         <dl className="work__story">
           {(
             [
-              ["Problem", work.problem],
-              ["Approach", work.approach],
-              ["Result", work.result],
+              ["상황", work.problem],
+              ["한 일", work.approach],
+              ["결과물", work.result],
             ] as const
           ).map(([k, v]) => (
             <div key={k}>

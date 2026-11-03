@@ -48,6 +48,8 @@ function SideNav() {
       <ul className="side-nav__list">
         {CHAPTERS.map((ch, ci) => {
           const isActive = active.chapter === ci;
+          // 챕터 표지(목차)에서는 작업물 목록을 펼치지 않고, 01번 작업물부터 펼침
+          const isOpen = isActive && active.panel > 0;
           const panels = panelsOf(ch);
           // 현재 장이 속한 작업물 번호 (표지면 -1)
           const p = panels[active.panel];
@@ -63,10 +65,10 @@ function SideNav() {
               >
                 <span className="side-nav__text">{ch.text}</span>
               </button>
-              <ul className={`side-nav__works${isActive ? " is-open" : ""}`} style={{ "--kw": `var(${ch.token})` } as React.CSSProperties}>
+              <ul className={`side-nav__works${isOpen ? " is-open" : ""}`} style={{ "--kw": `var(${ch.token})` } as React.CSSProperties}>
                 {ch.works.map((w, wi) => (
                   <li key={w.id}>
-                    <button type="button" className={`side-nav__work${activeWork === wi ? " is-active" : ""}`} onClick={() => goTo(ci, workPanelIndex(ch, wi))} tabIndex={isActive ? 0 : -1}>
+                    <button type="button" className={`side-nav__work${activeWork === wi ? " is-active" : ""}`} onClick={() => goTo(ci, workPanelIndex(ch, wi))} tabIndex={isOpen ? 0 : -1}>
                       {w.title}
                     </button>
                   </li>

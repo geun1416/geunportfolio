@@ -1,8 +1,0 @@
-.circle-wipe { position: fixed; top: 50%; left: 50%; width: 100vmax; height: 100vmax; margin: -50vmax 0 0 -50vmax; border-radius: 50%; z-index: 30; pointer-events: none; transform: scale(0); }
-.circle-wipe[data-chapter="design"] { background: var(--kw-design); }
-.circle-wipe[data-chapter="proposal"] { background: var(--kw-proposal); }
-.circle-wipe[data-chapter="lead"] { background: var(--kw-lead); }
-
-@media (max-width: 768px) {
-  .circle-wipe { display: none; }
-}

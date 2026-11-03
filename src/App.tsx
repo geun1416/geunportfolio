@@ -10,7 +10,6 @@ import Intro from "./components/Intro/Intro";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import SideNav from "./components/SideNav/SideNav";
 import Chapter from "./components/Chapter/Chapter";
-import CircleWipe from "./components/CircleWipe/CircleWipe";
 import Contact from "./components/Contact/Contact";
 import { CHAPTERS } from "./data/chapters";
 
@@ -52,7 +51,6 @@ function App() {
         <Chapter key={ch.id} chapter={ch} index={i} />
       ))}
       <Contact />
-      <CircleWipe />
     </div>
   );
 }
