@@ -14,6 +14,8 @@ import Chapter from "./components/Chapter/Chapter";
 import Archive from "./components/Archive/Archive";
 import Contact from "./components/Contact/Contact";
 import Lightbox from "./components/Lightbox/Lightbox";
+import Cursor from "./components/Cursor/Cursor";
+import Sound from "./components/Sound/Sound";
 import { CHAPTERS } from "./data/chapters";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -57,6 +59,8 @@ function App() {
       <Archive />
       <Contact />
       <Lightbox />
+      <Sound />
+      <Cursor />
     </div>
   );
 }

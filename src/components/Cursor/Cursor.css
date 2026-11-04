@@ -1,0 +1,14 @@
+/* 기본 커서를 숨기고 대신 그림 (마우스가 있는 기기에서만) */
+.has-cursor, .has-cursor * { cursor: none !important; }
+.has-cursor input, .has-cursor textarea { cursor: text !important; }
+.cursor { display: none; }
+.has-cursor .cursor { display: block; position: fixed; inset: 0; z-index: 9999; pointer-events: none; }
+.cursor__dot, .cursor__ring { position: fixed; left: 0; top: 0; will-change: transform; transition: opacity 0.3s ease; }
+.cursor__dot span { position: absolute; left: -3.5px; top: -3.5px; width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); }
+.cursor__ring span { position: absolute; left: -17px; top: -17px; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--color-accent) 45%, transparent); background: color-mix(in srgb, var(--color-accent) 5%, transparent); transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s ease, border-color 0.3s ease; }
+.cursor__ring.is-hot span { transform: scale(1.55); background: color-mix(in srgb, var(--color-accent) 12%, transparent); border-color: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+.cursor__ring.is-down span { transform: scale(0.85); }
+.cursor-out .cursor__dot, .cursor-out .cursor__ring { opacity: 0; }
+/* 크게 보기 화면(어두운 배경)에서도 보이도록 */
+.lb-open .cursor__dot span { background: #fff; }
+.lb-open .cursor__ring span { border-color: rgba(255, 255, 255, 0.5); }
