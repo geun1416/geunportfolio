@@ -3,3 +3,6 @@ dist
 .DS_Store
 *.log
 .env.local
+
+# PDF 결과물 (용량이 커서 저장소에는 올리지 않음)
+portfolio-pdf/

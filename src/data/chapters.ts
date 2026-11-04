@@ -33,6 +33,8 @@ export type Work = {
     /** 상세 장이 여러 장일 때: 장마다 제목·배치·이미지 (있으면 details 대신 사용) */
     pages?: DetailPage[];
   };
+  /** 실제 사이트 등 바로 가 볼 수 있는 링크 */
+  link?: { label: string; url: string };
   /** 개요 장 맨 아래 작은 안내 문구 */
   note?: string;
   /** 개요 장 아래쪽에 작게 붙이는 그 밖의 작업 썸네일 */
@@ -207,7 +209,8 @@ export const CHAPTERS: Chapter[] = [
         summary: "회사가 무엇을 하는지 한눈에 보이도록 정체성부터 다시 정의했습니다.",
         problem: "주력 사업이 드론·UTM으로 바뀌었는데, 예전 사이트로는 회사가 무엇을 하는지 알기 어려웠습니다.",
         approach: "사이트 카피 전체를 직접 쓰고, UTM/UATM을 1depth 메뉴로 올렸습니다. 공통 스타일(컬러·타이포·컴포넌트)을 먼저 정해 서브페이지까지 같은 기준으로 확장했습니다.",
-        result: "2주 만에 리뉴얼 완료 · palnet.co.kr",
+        result: "2주 만에 리뉴얼 완료",
+        link: { label: "palnet.co.kr", url: "https://palnet.co.kr" },
         panels: 2,
         images: {
           ratio: 16 / 9,

@@ -89,6 +89,10 @@
 .tile::after { transform: translateY(-3px); transition: opacity 0.3s ease, transform 0.3s ease; }
 .tile:hover::after, .tile:focus-visible::after { opacity: 1; transform: none; }
 .tile--contain:hover .frame__view > img { transform: scale(1.025); }
+.work__link { align-self: flex-start; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--kw); color: var(--kw); font-family: var(--font-en); font-weight: 600; font-size: 0.85rem; transition: background 0.3s ease, color 0.3s ease; }
+.work__link span { transition: transform 0.3s ease; }
+.work__link:hover { background: var(--kw); color: #fff; }
+.work__link:hover span { transform: translate(2px, -2px); }
 .work__note { margin-top: 14px; font-family: var(--font-kr); font-size: 0.8rem; color: var(--color-text-muted); }
 .work__note::before { content: "※ "; }
 /* 직접 만져 보는 위젯 타일 (토큰) */

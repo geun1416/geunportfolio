@@ -112,6 +112,11 @@ function WorkPanel({ work, workIndex, detail, page = 0 }: Props) {
             </div>
           ))}
         </dl>
+        {work.link && (
+          <a className="work__link" href={work.link.url} target="_blank" rel="noopener noreferrer">
+            {work.link.label} <span aria-hidden="true">↗</span>
+          </a>
+        )}
         {work.note && <p className="work__note">{work.note}</p>}
         {work.extras && (
           <div className="work__extras">

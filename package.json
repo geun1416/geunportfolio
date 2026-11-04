@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pdf": "node scripts/make-pdf.mjs",
+    "pdf:commerce": "node scripts/make-pdf.mjs commerce"
   },
   "dependencies": {
     "gsap": "^3.15.0",
