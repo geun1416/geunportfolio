@@ -1,0 +1,44 @@
+/* 틀: 브라우저 창 / 종이 문서 */
+.frame { position: relative; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+.frame--screen { border-radius: 8px; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 18px 40px -12px rgba(40, 28, 16, 0.3); }
+.frame--doc { border-radius: 3px; border: 1px solid rgba(0, 0, 0, 0.06); box-shadow: 0 14px 34px -14px rgba(40, 28, 16, 0.32); }
+.frame__bar { flex: none; height: 22px; display: flex; align-items: center; gap: 6px; padding: 0 10px; background: #F1EEE8; border-bottom: 1px solid #E4DFD6; }
+.frame__bar i { width: 8px; height: 8px; border-radius: 50%; background: #D6D0C5; }
+[data-theme='dark'] .frame__bar { background: #2A2824; border-bottom-color: #34312C; }
+[data-theme='dark'] .frame__bar i { background: #4A4640; }
+.frame__view { position: relative; flex: 1; min-height: 0; }
+.frame__view > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+
+/* 스테이지: 챕터 색이 옅게 깔린 판. 틀은 판 안에서 비율을 지키며 최대 크기 */
+.stage { width: 100%; height: min(64vh, 44vw); border-radius: 12px; background: color-mix(in srgb, var(--kw) 9%, var(--color-bg)); display: grid; place-items: center; container-type: size; }
+.stage__frame { width: min(88cqw, calc((88cqh - 22px) * var(--r))); }
+.stage__frame.frame--doc, .stage__frame.frame--plain { width: min(88cqw, calc(88cqh * var(--r))); }
+/* 틀 없는 대표 이미지 (인쇄물 모음·사진 콜라주) */
+.frame--plain { background: transparent; overflow: visible; }
+.frame--plain .frame__view > img { object-fit: contain; }
+.stage__frame .frame__view { aspect-ratio: var(--r); flex: none; }
+
+/* 번호 핀 */
+.pins { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.pin { position: absolute; width: 0; height: 0; pointer-events: auto; }
+.pin__dot { position: absolute; left: -15px; top: -15px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-en); font-weight: 700; font-size: 0.85rem; color: #fff; background: var(--kw); box-shadow: 0 0 0 4px color-mix(in srgb, var(--kw) 25%, transparent), 0 6px 16px rgba(0, 0, 0, 0.18); cursor: pointer; transition: transform 0.25s ease; }
+.pin__dot::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--kw); opacity: 0; animation: pinPulse 2.4s ease-out infinite; }
+.pin:nth-child(2) .pin__dot::after { animation-delay: 0.3s; }
+.pin:nth-child(3) .pin__dot::after { animation-delay: 0.6s; }
+.pin:nth-child(4) .pin__dot::after { animation-delay: 0.9s; }
+@keyframes pinPulse { 0% { opacity: 0.7; transform: scale(1); } 70%, 100% { opacity: 0; transform: scale(1.9); } }
+.pin.is-open .pin__dot { transform: scale(1.12); }
+.pin__note { position: absolute; left: 22px; top: -14px; width: max-content; max-width: 240px; padding: 9px 12px; border-radius: 6px; background: var(--color-text); color: var(--color-bg); font-family: var(--font-kr); font-size: 0.85rem; line-height: 1.45; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+.pin--left .pin__note { left: auto; right: 22px; }
+.pin.is-open .pin__note { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .pin__dot::after { animation: none; } }
+
+/* 전·후 비교 */
+.compare { position: relative; width: 100%; height: 100%; overflow: hidden; cursor: ew-resize; user-select: none; touch-action: pan-y; background: var(--color-bg-secondary); }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.compare__tag { position: absolute; top: 12px; z-index: 2; padding: 4px 10px; border-radius: 999px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; background: rgba(17, 16, 14, 0.75); color: #fff; }
+.compare__tag--before { left: 12px; }
+.compare__tag--after { right: 12px; }
+.compare__handle { position: absolute; top: 0; bottom: 0; z-index: 2; width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15); }
+.compare__handle span { position: absolute; top: 50%; left: 50%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; display: grid; place-items: center; background: var(--kw); color: #fff; font-family: var(--font-en); font-size: 0.95rem; letter-spacing: 2px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25); transition: transform 0.2s ease; }
+.compare.is-dragging .compare__handle span, .compare__handle:focus-visible span { transform: scale(1.1); }

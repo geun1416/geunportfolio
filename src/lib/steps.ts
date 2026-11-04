@@ -14,9 +14,11 @@ export const registerStops = (key: string, provider: Provider) => {
 const allStops = () => {
   const stops = [0];
   providers.forEach((p) => stops.push(...p()));
-  const contact = document.getElementById("contact");
+  // 챕터 뒤의 일반 섹션(Archive, Contact)은 위쪽 끝을 멈춤 지점으로
   const max = document.documentElement.scrollHeight - window.innerHeight;
-  if (contact) stops.push(Math.min(contact.getBoundingClientRect().top + window.scrollY, max));
+  document.querySelectorAll<HTMLElement>("[data-stop]").forEach((el) => {
+    stops.push(Math.min(el.getBoundingClientRect().top + window.scrollY, max));
+  });
   return [...new Set(stops.map((v) => Math.round(v)))].sort((a, b) => a - b);
 };
 

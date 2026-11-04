@@ -14,6 +14,11 @@
 .side-nav.is-compact .side-nav__item.is-active .side-nav__text,
 .side-nav.is-compact .side-nav__item:hover .side-nav__text { color: var(--kw); opacity: 1; }
 
+/* 처음으로: 인트로를 벗어난 뒤에만 보임 */
+.side-nav__group--home { display: none; }
+.side-nav.is-compact .side-nav__group--home { display: flex; margin-bottom: 6px; }
+.side-nav__home { --kw: var(--color-text); font-size: 1.35rem; font-weight: 600; }
+
 /* 현재 챕터 아래 작업물 목록 (목록 전체가 0.55배로 줄어들기 때문에 기준 크기를 크게 잡음) */
 .side-nav__works { display: none; }
 .side-nav.is-compact .side-nav__works.is-open { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; margin: 10px 0 6px; animation: sideNavOpen 0.4s ease; }

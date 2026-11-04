@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CHAPTERS, panelsOf, workPanelIndex } from "../../data/chapters";
+import { CHAPTERS, fullTitle, panelsOf, workPanelIndex } from "../../data/chapters";
 import type { ChapterActive } from "../Chapter/Chapter";
+import { scrollToY } from "../../lib/scroll";
 import "./SideNav.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,12 +12,25 @@ gsap.registerPlugin(ScrollTrigger);
 function SideNav() {
   const navRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<ChapterActive>({ chapter: -1, panel: 0 });
+  const [inArchive, setInArchive] = useState(false);
 
   useEffect(() => {
     const onActive = (e: Event) => setActive((e as CustomEvent<ChapterActive>).detail);
     window.addEventListener("chapter:active", onActive);
     return () => window.removeEventListener("chapter:active", onActive);
   }, []);
+
+  // 챕터 뒤 Archive·Contact 구간
+  useEffect(() => {
+    const st = ScrollTrigger.create({ trigger: "#archive", start: "top 50%", end: "max", refreshPriority: -1, onToggle: (self) => setInArchive(self.isActive) });
+    return () => st.kill();
+  }, []);
+
+  const goArchive = () => {
+    const el = document.getElementById("archive");
+    if (el) scrollToY(el.getBoundingClientRect().top + window.scrollY);
+  };
+  const goHome = () => scrollToY(0, { duration: 2 });
 
   useEffect(() => {
     const nav = navRef.current!;
@@ -41,13 +55,19 @@ function SideNav() {
 
   const goTo = (chapter: number, panel = 0) => window.dispatchEvent(new CustomEvent<ChapterActive>("chapter:goto", { detail: { chapter, panel } }));
 
-  const inChapter = active.chapter >= 0;
+  const inChapter = active.chapter >= 0 && !inArchive;
+  const compact = inChapter || inArchive || active.chapter === -2;
 
   return (
-    <nav ref={navRef} className={`side-nav${inChapter ? " is-compact" : ""}${active.chapter === -2 ? " is-hidden" : ""}`} aria-label="포트폴리오 목차">
+    <nav ref={navRef} className={`side-nav${compact ? " is-compact" : ""}`} aria-label="포트폴리오 목차">
       <ul className="side-nav__list">
+        <li className="side-nav__group side-nav__group--home">
+          <button type="button" className="side-nav__item side-nav__home" onClick={goHome} tabIndex={compact ? 0 : -1}>
+            <span className="side-nav__text">↑ Top</span>
+          </button>
+        </li>
         {CHAPTERS.map((ch, ci) => {
-          const isActive = active.chapter === ci;
+          const isActive = inChapter && active.chapter === ci;
           // 챕터 표지(목차)에서는 작업물 목록을 펼치지 않고, 01번 작업물부터 펼침
           const isOpen = isActive && active.panel > 0;
           const panels = panelsOf(ch);
@@ -69,7 +89,7 @@ function SideNav() {
                 {ch.works.map((w, wi) => (
                   <li key={w.id}>
                     <button type="button" className={`side-nav__work${activeWork === wi ? " is-active" : ""}`} onClick={() => goTo(ci, workPanelIndex(ch, wi))} tabIndex={isOpen ? 0 : -1}>
-                      {w.title}
+                      {fullTitle(w)}
                     </button>
                   </li>
                 ))}
@@ -77,6 +97,17 @@ function SideNav() {
             </li>
           );
         })}
+        <li className="side-nav__group">
+          <button
+            type="button"
+            className={`side-nav__item side-nav__archive${inArchive ? " is-active" : ""}`}
+            style={{ "--kw": "var(--color-text)" } as React.CSSProperties}
+            onClick={goArchive}
+            aria-current={inArchive ? "true" : undefined}
+          >
+            <span className="side-nav__text">Archive</span>
+          </button>
+        </li>
       </ul>
     </nav>
   );

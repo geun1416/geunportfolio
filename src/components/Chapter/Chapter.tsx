@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CHAPTERS, panelsOf, workPanelIndex, type Chapter as ChapterData } from "../../data/chapters";
+import { CHAPTERS, fullTitle, panelsOf, workPanelIndex, type Chapter as ChapterData } from "../../data/chapters";
 import { scrollToY } from "../../lib/scroll";
 import { registerStops } from "../../lib/steps";
 import WorkPanel from "./WorkPanel";
@@ -194,7 +194,7 @@ function Chapter({ chapter, index }: Props) {
                 <li key={w.id}>
                   <button type="button" className="cover__row" onClick={() => goWork(wi)}>
                     <span className="cover__row-no">{pad(wi + 1)}</span>
-                    <span className="cover__row-title">{w.title}</span>
+                    <span className="cover__row-title">{fullTitle(w)}</span>
                     <span className="cover__row-role">{w.role}</span>
                     <span className="cover__row-year">{w.period.split(" ")[0]}</span>
                   </button>
@@ -205,7 +205,7 @@ function Chapter({ chapter, index }: Props) {
         </div>
 
         {panels.slice(1).map((p, i) =>
-          p.kind === "cover" ? null : <WorkPanel key={`${p.work.id}-${p.kind}`} work={p.work} workIndex={p.index} detail={p.kind === "detail"} panelNo={i + 2} />
+          p.kind === "cover" ? null : <WorkPanel key={`${p.work.id}-${p.kind}-${p.kind === "detail" ? p.page : 0}`} work={p.work} workIndex={p.index} detail={p.kind === "detail"} page={p.kind === "detail" ? p.page : 0} panelNo={i + 2} />
         )}
       </div>
 

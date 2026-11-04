@@ -55,7 +55,7 @@ function Intro() {
 
       <div className="intro__inner" ref={innerRef}>
         <div className="intro__main">
-          <p className="intro__label">UI/UX · Proposal Designer · Since 2019</p>
+          <p className="intro__label">UI/UX · Visual Designer · Since 2019</p>
           <h1 className="intro__name">
             <span className="intro__name-en" aria-label={NAME}>
               {NAME.split("").map((c, i) => (
@@ -66,7 +66,9 @@ function Intro() {
             </span>
             <span className="intro__name-kr">김지은</span>
           </h1>
-          <p className="intro__title">기획하고, 디자인하고, 설득합니다.</p>
+          <p className="intro__title">
+            기획하고, 디자인하고, <em className="intro__accent">설득합니다.</em>
+          </p>
           <p className="intro__desc">복잡한 이야기를 한 장으로 정리합니다.</p>
         </div>
 

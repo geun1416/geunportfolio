@@ -45,3 +45,12 @@ img, svg {
 h1, h2, h3, h4, p {
   font-weight: normal;
 }
+
+/* 줄 균형: 제목은 두 줄 길이를 비슷하게, 본문은 끝에 한 단어만 남지 않게 */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p, dd, li {
+  text-wrap: pretty;
+}
