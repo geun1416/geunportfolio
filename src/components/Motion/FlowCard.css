@@ -1,0 +1,13 @@
+.flowcard { margin: 0; display: flex; align-items: center; gap: 22px; }
+.flowcard__paper { position: relative; flex: none; width: clamp(150px, 12vw, 190px); aspect-ratio: 4 / 3; border-radius: 8px; background: #fff; overflow: hidden; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 16px 32px -14px rgba(40, 28, 16, 0.32); }
+.flowcard__el { position: absolute; transition: left 0.9s cubic-bezier(0.65, 0, 0.25, 1), top 0.9s cubic-bezier(0.65, 0, 0.25, 1), width 0.9s cubic-bezier(0.65, 0, 0.25, 1), height 0.9s cubic-bezier(0.65, 0, 0.25, 1), background 0.7s ease, border-radius 0.7s ease, opacity 0.6s ease, outline-color 0.5s; outline: 1px dashed transparent; outline-offset: -1px; }
+.flowcard__el.is-dash { outline-color: #C9C2B6; }
+.flowcard__badge { position: absolute; width: 12px; height: 12px; border-radius: 50%; display: grid; place-items: center; background: #B24A30; color: #fff; font-family: var(--font-en); font-weight: 700; font-size: 0.5rem; opacity: 0; transform: scale(0.4); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.flowcard__badge.is-on { opacity: 1; transform: none; }
+.flowcard__cap { display: flex; flex-direction: column; gap: 6px; }
+.flowcard__step { display: flex; align-items: baseline; gap: 8px; font-family: var(--font-kr); font-size: 0.9rem; color: var(--color-text-muted); opacity: 0.6; transition: color 0.5s ease, opacity 0.5s ease, transform 0.5s ease; }
+.flowcard__step b { font-family: var(--font-en); font-weight: 600; font-size: 0.75rem; }
+.flowcard__step.is-on { opacity: 1; transform: translateX(4px); }
+.flowcard__step--0.is-on { color: var(--kw-strategy); }
+.flowcard__step--1.is-on { color: var(--kw-design); }
+.flowcard__step--2.is-on { color: var(--kw-proposal); }

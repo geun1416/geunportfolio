@@ -78,6 +78,23 @@
 .tile--plain .frame { border-radius: 6px; }
 .tile--contain .frame { background: transparent; border-radius: 0; overflow: visible; }
 .tile--contain .frame__view > img { object-fit: contain; object-position: center; filter: drop-shadow(0 10px 18px rgba(40, 28, 16, 0.18)); }
+/* 상세 타일: 마우스를 올리면 잘린 이미지 전체를 보여 주고, 누르면 크게 보기 */
+.tile { cursor: zoom-in; }
+/* 잘린 이미지 위에 전체 이미지를 겹쳐 두고, 마우스를 올리면 부드럽게 바꿔 보여 줌 */
+.frame__view > img { transition: opacity 0.45s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.frame__view > img.tile__full { position: absolute; inset: 0; width: 100%; height: 100% !important; object-fit: contain; object-position: center; background: #fff; opacity: 0; transform: scale(1.04); }
+.tile:hover .frame__view > img.tile__full, .tile:focus-visible .frame__view > img.tile__full { opacity: 1; transform: none; }
+.tile:not(.tile--contain):hover .frame__view > img:not(.tile__full) { opacity: 0; transform: scale(0.98); }
+.tile::after { content: "크게 보기 ↗"; position: absolute; right: 14px; top: 11px; font-family: var(--font-kr); font-size: 0.75rem; color: var(--kw); opacity: 0; transition: opacity 0.2s; }
+.tile::after { transform: translateY(-3px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.tile:hover::after, .tile:focus-visible::after { opacity: 1; transform: none; }
+.tile--contain:hover .frame__view > img { transform: scale(1.025); }
+.work__note { margin-top: 14px; font-family: var(--font-kr); font-size: 0.8rem; color: var(--color-text-muted); }
+.work__note::before { content: "※ "; }
+/* 직접 만져 보는 위젯 타일 (토큰) */
+.tile--widget { cursor: default; padding: 40px 18px 18px; }
+.tile--widget::after { content: none; }
+.tile__widget { position: relative; flex: 1; min-height: 0; }
 /* 긴 페이지: 가로를 채우고 위에서부터 */
 .tile--width .frame__view > img { height: auto; }
 /* 개요 장의 작은 썸네일 줄 (그 밖의 작업) */
@@ -125,7 +142,18 @@
   .cover__row { grid-template-columns: 40px minmax(0, 1fr) 48px; }
   .cover__row-role { display: none; }
   .work, .work--detail { grid-template-columns: 1fr; gap: 28px; padding: 56px 6vw; }
-  .work__grid, .work__grid[data-count], .work__grid[data-layout] { grid-template-columns: 1fr; grid-template-rows: none; }
+  .work__grid, .work__grid[data-count], .work__grid[data-layout] { grid-template-columns: 1fr !important; grid-template-rows: none !important; }
   .work__grid > :first-child { grid-row: auto; }
   .work__grid .work__img { aspect-ratio: 4 / 3; height: auto; }
+  /* 모바일: 타일은 비율로 높이를 정하고 한 줄에 하나씩 */
+  .work__grid > * { grid-column: auto !important; grid-row: auto !important; }
+  .work__grid .tile { aspect-ratio: 16 / 11; padding-top: 36px; }
+  .work__grid .tile--contain { aspect-ratio: 4 / 3; }
+  .work__grid .tile--width { aspect-ratio: 3 / 4; }
+  .work__grid[data-layout="row"] .tile--contain { aspect-ratio: 3 / 4; }
+  .work__grid .tile--widget { aspect-ratio: auto; }
+  .tile::after { content: none; }
+  .work__mini { flex-wrap: wrap; gap: 4px 10px; }
+  .work__mini-title { flex: 1 1 60%; }
+  .work__extras li:hover { transform: none; box-shadow: none; }
 }

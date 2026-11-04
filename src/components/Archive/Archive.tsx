@@ -26,7 +26,7 @@ function Archive() {
       <header className="archive__head">
         <p className="archive__label">Archive</p>
         <h2 className="archive__title">2019 — 2025</h2>
-        <p className="archive__desc">입사 초기부터 이어 온 웹·모바일 작업입니다.<br />퍼블리싱으로 시작해 기획과 디자인까지 맡는 범위가 넓어졌습니다.</p>
+        <p className="archive__desc">2019년부터 이어 온 웹·모바일 디자인과 퍼블리싱 작업입니다.<br />홈페이지, 예약 서비스, QR 출입, 앱까지 여러 분야의 화면을 만들었습니다.</p>
       </header>
 
       <ul className="archive__list" onPointerLeave={() => setActive(null)}>

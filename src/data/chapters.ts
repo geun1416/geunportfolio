@@ -25,12 +25,16 @@ export type Work = {
     frame?: Frame;
     /** 있으면 대표 이미지 대신 전·후 비교 슬라이더 */
     compare?: { before: string; after: string };
+    /** 있으면 전후 비교 대신 블록 재배치 애니메이션 (x, y, w, h %) */
+    rearrange?: { label: string; from?: [number, number, number, number]; to?: [number, number, number, number]; toLabel?: string }[];
     details?: Detail[];
     /** 상세 배치: "feature-left" = 첫 이미지를 왼쪽 세로로 크게, 나머지는 오른쪽에 세로로 나열 */
     detailLayout?: Layout;
     /** 상세 장이 여러 장일 때: 장마다 제목·배치·이미지 (있으면 details 대신 사용) */
     pages?: DetailPage[];
   };
+  /** 개요 장 맨 아래 작은 안내 문구 */
+  note?: string;
   /** 개요 장 아래쪽에 작게 붙이는 그 밖의 작업 썸네일 */
   extras?: { src: string; caption: string }[];
   /** 대표 이미지 위 번호 핀 (x·y: 이미지 기준 %) */
@@ -41,7 +45,7 @@ export type Pin = { x: number; y: number; text: string };
 /** screen = 브라우저 창, doc = 종이 문서, plain = 틀 없이 이미지만 (인쇄물·사진) */
 export type Frame = "screen" | "doc" | "plain";
 /** fit: contain = 자르지 않고 전체를 보여 줌, width = 가로를 꽉 채우고 위에서부터 (긴 페이지) */
-export type Detail = { src: string; caption: string; frame?: Frame; fit?: "contain" | "width" };
+export type Detail = { src: string; caption: string; frame?: Frame; fit?: "contain" | "width"; widget?: "tokens" };
 /** feature-left: 첫 장 왼쪽 크게 / feature-top: 첫 장 위에 가로로 크게 / row: 한 줄 / gallery: 4×2 / top-wide: 위 여러 장 + 아래 가로 한 장 */
 export type Layout = "feature-left" | "feature-top" | "row" | "gallery" | "top-wide";
 export type DetailPage = { title: string; layout?: Layout; items: Detail[] };
@@ -82,6 +86,17 @@ export const CHAPTERS: Chapter[] = [
         images: {
           ratio: 1920 / 1435,
           compare: { before: "/works/kac-main/compare-before.webp", after: "/works/kac-main/compare-after.webp" },
+          rearrange: [
+            { label: "회원 정보", from: [15.5, 27, 16, 20.5], to: [18.5, 7, 62.5, 17.5], toLabel: "회원 정보 + 안전 알림" },
+            { label: "신청 · 알림 내역", from: [33, 27, 34, 21.5], to: [18.5, 25.5, 46.5, 26], toLabel: "비행승인 · 허가 현황" },
+            { label: "자동비행 신청 승인", from: [15.5, 69, 69, 15], to: [18.5, 25.5, 46.5, 26], toLabel: "비행승인 · 허가 현황" },
+            { label: "서비스 바로가기", from: [15.5, 9.5, 68.5, 16], to: [18.5, 52.5, 62.5, 6.5], toLabel: "KAC 바로가기" },
+            { label: "구독 서비스", from: [68, 27, 16.5, 21], to: [65.5, 25.5, 15.5, 26], toLabel: "등급 안내" },
+            { label: "고객지원", from: [68, 51, 16.5, 9], to: [62.5, 60.5, 18.5, 22.5] },
+            { label: "지표 카드", from: [33, 50, 34, 9.5] },
+            { label: "관심 회랑", from: [15.5, 50, 16, 12] },
+            { label: "공지사항 · 자료실 탭", to: [18.5, 60.5, 43, 22.5] },
+          ],
           details: [
             { src: "/works/kac-main/detail-1.webp", caption: "개편 전" },
             { src: "/works/kac-main/detail-2.webp", caption: "개편안 1" },
@@ -191,8 +206,8 @@ export const CHAPTERS: Chapter[] = [
         tools: "Figma, React",
         summary: "회사가 무엇을 하는지 한눈에 보이도록 정체성부터 다시 정의했습니다.",
         problem: "주력 사업이 드론·UTM으로 바뀌었는데, 예전 사이트로는 회사가 무엇을 하는지 알기 어려웠습니다.",
-        approach: "사이트 카피 전체를 직접 쓰고, UTM/UATM을 1depth 메뉴로 올렸습니다. 공통 스타일을 먼저 정해 주니어와 서브페이지를 나눠 작업했습니다.",
-        result: "2명이 2주 안에 일관된 사이트를 완성했습니다. palnet.co.kr",
+        approach: "사이트 카피 전체를 직접 쓰고, UTM/UATM을 1depth 메뉴로 올렸습니다. 공통 스타일(컬러·타이포·컴포넌트)을 먼저 정해 서브페이지까지 같은 기준으로 확장했습니다.",
+        result: "2주 만에 리뉴얼 완료 · palnet.co.kr",
         panels: 2,
         images: {
           ratio: 16 / 9,
@@ -232,11 +247,11 @@ export const CHAPTERS: Chapter[] = [
         client: "해밀이음",
         title: "읽기 학습 플랫폼",
         period: "",
-        role: "UI 디자인 리드 (부사수와 2인)",
+        role: "UI 디자인",
         tools: "Figma (Variables · Prototype)",
         summary: "초등학생이 글 한 편을 단계별로 읽어 나가는 학습 화면을 디자인하고, 디자인 토큰으로 스타일을 관리했습니다.",
         problem: "학년마다 난이도가 다른 읽기 학습을 하나의 흐름 안에서 보여 줘야 했습니다.",
-        approach: "학습을 범위 선택 → 한 문장씩 다이어트 → 주요 낱말 → 전체 글·퀴즈 → 완료 리포트 5단계 탭으로 나누고, 캐릭터와 배경으로 단계마다 같은 분위기를 이어 갔습니다. 색·글자·간격·라운드 값은 Figma Variables로 global → semantic(라이트/다크) 토큰으로 정리해 JSON으로 내보냈고, 이 기준으로 부사수와 화면을 나눠 작업했습니다.",
+        approach: "학습을 범위 선택 → 한 문장씩 다이어트 → 주요 낱말 → 전체 글·퀴즈 → 완료 리포트 5단계 탭으로 나누고, 캐릭터와 배경으로 단계마다 같은 분위기를 이어 갔습니다. 색·글자·간격·라운드 값은 Figma Variables로 global → semantic(라이트/다크) 토큰으로 정리해 JSON으로 내보냈습니다.",
         result: "학습 화면 5단계, 서비스 화면, 디자인 토큰(JSON), 컴포넌트 가이드, 프로토타입 플로우",
         panels: 2,
         images: {
@@ -260,7 +275,7 @@ export const CHAPTERS: Chapter[] = [
               title: "디자인 시스템",
               layout: "feature-top",
               items: [
-                { src: "/works/haemileum/system-tokens.webp", caption: "토큰 구조 (Figma Variables → JSON)", frame: "plain", fit: "contain" },
+                { src: "/works/haemileum/system-tokens.webp", caption: "토큰 바꿔 보기 · Figma Variables → JSON 실제 값", frame: "plain", fit: "contain", widget: "tokens" },
                 { src: "/works/haemileum/system-variables.webp", caption: "Figma Variables · semantic.light" },
                 { src: "/works/haemileum/system-components.webp", caption: "컴포넌트 가이드 · 입력 상태 · 모달 크기" },
                 { src: "/works/haemileum/system-flow.webp", caption: "프로토타입 플로우" },
@@ -338,97 +353,130 @@ export const CHAPTERS: Chapter[] = [
     works: [
       {
         id: "kazakhstan",
+        client: "KAC",
         title: "카자흐스탄 UTM/UATM 개발 제안 요약서",
         period: "2026 · 51p · 영문",
         role: "기획 참여 · 디자인",
-        tools: "PowerPoint, 생성형 AI",
-        summary: "해외 발주처를 위한 영문 제안 요약서를 기획부터 디자인까지 맡았습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
+        tools: "PowerPoint, ChatGPT, Firefly, Freepik",
+        summary: "해외 발주처에 한국공항공사의 UTM/UATM 역량을 소개하는 영문 제안 요약서입니다.",
+        problem: "처음 만나는 해외 발주처가 기관의 실적과 기술을 짧은 시간 안에 이해할 수 있어야 했습니다.",
+        approach: "대표 초안을 받아 구성과 메시지를 함께 정하고, 실적은 큰 숫자로, 구조와 지원 체계는 다이어그램 한 장으로 정리했습니다. 기체·관제 이미지는 생성형 AI로 만든 뒤 KAC 레드 톤으로 보정했습니다.",
+        result: "영문 제안 요약서 51쪽 (16:9) · 이후 계약 협의 단계로 진행",
+        note: "제안·발표 자료라 외부 공유가 어려워 본문 텍스트는 블러 처리했습니다.",
         panels: 2,
+        images: {
+          main: "/works/kazakhstan/main.webp",
+          ratio: 16 / 9,
+          frame: "doc",
+          pages: [
+            {
+              title: "핵심 장면",
+              items: [
+                { src: "/works/kazakhstan/detail-1.webp", caption: "First Mover · KAC 소개", frame: "plain", fit: "contain" },
+                { src: "/works/kazakhstan/detail-2.webp", caption: "운영 실적 수치 강조", frame: "plain", fit: "contain" },
+                { src: "/works/kazakhstan/detail-3.webp", caption: "KAC 중심 통합 지원 체계", frame: "plain", fit: "contain" },
+                { src: "/works/kazakhstan/detail-4.webp", caption: "서비스 수준 협약(SLA)", frame: "plain", fit: "contain" },
+              ],
+            },
+            {
+              title: "정책 · 실증 · 운영 체계",
+              items: [
+                { src: "/works/kazakhstan/detail-5.webp", caption: "FAA UTM 정책 로드맵", frame: "plain", fit: "contain" },
+                { src: "/works/kazakhstan/detail-6.webp", caption: "ICAO 국제 기준 체계", frame: "plain", fit: "contain" },
+                { src: "/works/kazakhstan/detail-7.webp", caption: "K-UAM 실증 단계", frame: "plain", fit: "contain" },
+                { src: "/works/kazakhstan/detail-8.webp", caption: "무중단 전환 워크플로", frame: "plain", fit: "contain" },
+              ],
+            },
+          ],
+        },
       },
       {
         id: "kuam-gc",
+        client: "KAC 컨소시엄",
         title: "K-UAM GC 제안서 · 발표자료",
         period: "2026 · 86p + 15p",
         role: "기획 참여 · 디자인",
-        tools: "PowerPoint, 생성형 AI",
-        summary: "A4 제안서와 16:9 발표자료를 하나의 디자인 시스템으로 전개했습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
+        tools: "PowerPoint, ChatGPT, Firefly, Freepik",
+        summary: "공공 입찰 제안서(A4 86쪽)와 발표 평가 자료(16:9 15쪽)를 하나의 디자인 시스템으로 만들었습니다.",
+        problem: "같은 사업을 A4 세로 제안서와 16:9 발표자료, 판형이 다른 두 문서로 동시에 내야 했습니다.",
+        approach: "장 표지, 키 포인트 상자, 인포그래픽 형식을 템플릿으로 먼저 정해 86쪽 전체에 적용하고, 같은 색과 아이소메트릭 공항 일러스트로 발표자료까지 이어 갔습니다.",
+        result: "제안서 86쪽, 발표자료 15쪽",
+        note: "제안·발표 자료라 외부 공유가 어려워 본문 텍스트는 블러 처리했습니다.",
         panels: 2,
+        images: {
+          main: "/works/kuam-gc/main.webp",
+          ratio: 1700 / 950,
+          frame: "plain",
+          pages: [
+            {
+              title: "제안서 (A4)",
+              layout: "row",
+              items: [
+                { src: "/works/kuam-gc/doc-1.webp", caption: "표지", frame: "plain", fit: "contain" },
+                { src: "/works/kuam-gc/doc-2.webp", caption: "장 표지 · 목차", frame: "plain", fit: "contain" },
+                { src: "/works/kuam-gc/doc-3.webp", caption: "제안 내용 인포그래픽", frame: "plain", fit: "contain" },
+                { src: "/works/kuam-gc/doc-4.webp", caption: "마스터 일정", frame: "plain", fit: "contain" },
+              ],
+            },
+            {
+              title: "발표자료 (16:9)",
+              items: [
+                { src: "/works/kuam-gc/deck-1.webp", caption: "표지", frame: "plain", fit: "contain" },
+                { src: "/works/kuam-gc/deck-2.webp", caption: "장 표지 · 아이소메트릭 공항", frame: "plain", fit: "contain" },
+                { src: "/works/kuam-gc/deck-3.webp", caption: "사업 이해", frame: "plain", fit: "contain" },
+                { src: "/works/kuam-gc/deck-4.webp", caption: "핵심 과제 3카드", frame: "plain", fit: "contain" },
+              ],
+            },
+          ],
+        },
       },
       {
         id: "ir",
-        title: "IR · 기업 제안 자료",
-        period: "2026",
+        client: "PAL Networks",
+        title: "IR · 투자 · 기술협력 제안",
+        period: "2026 · 23p + 24p + 11p",
         role: "기획 참여 · 디자인",
-        tools: "PowerPoint, 생성형 AI",
-        summary: "투자자와 대기업, 대상마다 다른 톤으로 회사의 이야기를 정리했습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
-        panels: 1,
-      },
-      {
-        id: "print",
-        title: "리플렛 · 포스터 · 대형 배너",
-        period: "2025 – 2026",
-        role: "디자인",
-        tools: "Figma, Illustrator",
-        summary: "전시와 홍보를 위한 인쇄물을 만들었습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
-        panels: 1,
-      },
-    ],
-  },
-  {
-    id: "lead",
-    text: "Lead",
-    sub: "Directing teams and owning outcomes",
-    token: "--kw-lead",
-    badges: ["Direction", "Review", "Deliverables", "Collaboration"],
-    desc: "디자인 방향을 정하고,\n팀이 같은 기준으로 일하도록 체계와 산출물을 관리하는 단계.",
-    works: [
-      {
-        id: "style-guide",
-        title: "디자인 스타일가이드",
-        period: "2024",
-        role: "디자인 리드",
-        tools: "Figma",
-        summary: "KAC UTM 사용자 웹과 관리자 화면의 디자인 기준을 문서로 정리했습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
-        panels: 1,
-      },
-      {
-        id: "deliverables",
-        title: "UI설계서 · 사용자 매뉴얼 · 산출물",
-        period: "2024 – 2026",
-        role: "산출물 작성 · 관리",
-        tools: "PowerPoint, Figma",
-        summary: "발주처에 제출하는 설계서와 매뉴얼을 화면 단위로 정리하고 관리했습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
-        panels: 1,
-      },
-      {
-        id: "team",
-        title: "디자인 체계와 협업 방식",
-        period: "2024 – 2026",
-        role: "디자인 리드",
-        tools: "Figma",
-        summary: "타이포 12단계, 그리드, 공통 컴포넌트로 팀이 같은 기준에서 일하게 했습니다.",
-        problem: TBD,
-        approach: TBD,
-        result: TBD,
-        panels: 1,
+        tools: "PowerPoint, ChatGPT, Firefly, Freepik",
+        summary: "투자자, 정부 R&D, 대기업, 읽는 사람에 맞춰 회사의 기술과 사업을 다른 톤으로 정리했습니다.",
+        problem: "기체(하드웨어)와 관제(소프트웨어)를 함께 하는 회사라는 점을, 대상마다 다른 관심사에 맞춰 설명해야 했습니다.",
+        approach: "HW·SW 융합 구조, 생태계 여정, 시장 확장 단계를 각각 한 장의 다이어그램으로 정리하고, 같은 그리드와 컬러 위에서 대상에 따라 강조점을 바꿨습니다. 기체 이미지는 생성형 AI로 만든 뒤 보정했습니다.",
+        result: "IR 투자 계획안 23쪽, 투·융자연계 기술개발사업 24쪽, 한화에어로스페이스 기술협력 제안 11쪽",
+        note: "제안·발표 자료라 외부 공유가 어려워 본문 텍스트는 블러 처리했습니다.",
+        panels: 2,
+        images: {
+          main: "/works/ir/main.webp",
+          ratio: 1440 / 972,
+          frame: "plain",
+          pages: [
+            {
+              title: "IR 투자 계획안",
+              items: [
+                { src: "/works/ir/detail-1.webp", caption: "하드웨어 · 소프트웨어 융합", frame: "plain", fit: "contain" },
+                { src: "/works/ir/detail-2.webp", caption: "예약부터 비행까지, 생태계 여정", frame: "plain", fit: "contain" },
+                { src: "/works/ir/detail-3.webp", caption: "시장 확장 단계", frame: "plain", fit: "contain" },
+                { src: "/works/ir/detail-4.webp", caption: "특별자유화구역 실증 지도", frame: "plain", fit: "contain" },
+              ],
+            },
+            {
+              title: "투·융자연계 기술개발사업",
+              items: [
+                { src: "/works/ir/dcp-1.webp", caption: "통합 솔루션 소개", frame: "plain", fit: "contain" },
+                { src: "/works/ir/dcp-2.webp", caption: "핵심 기술", frame: "plain", fit: "contain" },
+                { src: "/works/ir/dcp-3.webp", caption: "인증 로드맵", frame: "plain", fit: "contain" },
+                { src: "/works/ir/dcp-4.webp", caption: "제품 아키텍처", frame: "plain", fit: "contain" },
+              ],
+            },
+            {
+              title: "한화에어로스페이스 기술협력 제안",
+              items: [
+                { src: "/works/ir/hanwha-1.webp", caption: "통합 운용 구조", frame: "plain", fit: "contain" },
+                { src: "/works/ir/hanwha-2.webp", caption: "플랫폼 구성", frame: "plain", fit: "contain" },
+                { src: "/works/ir/hanwha-3.webp", caption: "단계별 도입 전략", frame: "plain", fit: "contain" },
+                { src: "/works/ir/hanwha-4.webp", caption: "글로벌 확장", frame: "plain", fit: "contain" },
+              ],
+            },
+          ],
+        },
       },
     ],
   },

@@ -26,6 +26,15 @@ export const initStepper = () => {
   const desktop = window.matchMedia("(min-width: 769px)");
   let locked = false;
   let cooldownUntil = 0;
+  let lastWheel = 0;
+  let safety = 0;
+
+  const unlock = () => {
+    window.clearTimeout(safety);
+    if (!locked) return;
+    locked = false;
+    cooldownUntil = performance.now() + 350; // 트랙패드 관성 스크롤 흡수
+  };
 
   const step = (dir: 1 | -1) => {
     const y = window.scrollY;
@@ -33,13 +42,9 @@ export const initStepper = () => {
     const target = dir > 0 ? stops.find((v) => v > y + 2) : [...stops].reverse().find((v) => v < y - 2);
     if (target === undefined) return false;
     locked = true;
-    scrollToY(target, {
-      duration: 1.1,
-      onComplete: () => {
-        locked = false;
-        cooldownUntil = performance.now() + 450; // 트랙패드 관성 스크롤 흡수
-      },
-    });
+    // 애니메이션 완료 신호가 오지 않는 경우에도 잠김이 풀리도록 안전장치
+    safety = window.setTimeout(unlock, 1500);
+    scrollToY(target, { duration: 1.1, onComplete: unlock });
     return true;
   };
 
@@ -49,15 +54,19 @@ export const initStepper = () => {
   };
 
   const onWheel = (e: WheelEvent) => {
+    if (document.documentElement.classList.contains("lb-open")) return consume(e); // 크게 보기 중에는 이동하지 않음
     if (!desktop.matches || e.ctrlKey) return; // 모바일·확대(ctrl+휠)는 그대로
     const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    const now = performance.now();
+    const newGesture = now - lastWheel > 180; // 잠깐 멈췄다가 다시 굴리면 새 동작으로 봄 (마우스 휠)
+    lastWheel = now;
     if (Math.abs(delta) < 2) return consume(e);
-    if (locked || performance.now() < cooldownUntil) return consume(e);
+    if (locked || (now < cooldownUntil && !newGesture)) return consume(e);
     if (step(delta > 0 ? 1 : -1)) consume(e);
   };
 
   const onKey = (e: KeyboardEvent) => {
-    if (!desktop.matches) return;
+    if (!desktop.matches || document.documentElement.classList.contains("lb-open")) return;
     const tag = (e.target as HTMLElement)?.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA") return;
     const next = ["ArrowDown", "ArrowRight", "PageDown"].includes(e.key) || (e.key === " " && !e.shiftKey);

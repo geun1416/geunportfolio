@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CHAPTERS } from "../../data/chapters";
+import FlowCard from "../Motion/FlowCard";
 import "./Intro.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +12,9 @@ const NAME = "Kim Jieun";
 function Intro() {
   const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  // 카드 단계에 맞춰 문구의 단어에 색이 들어옴 (기획 → 디자인 → 설득)
+  const [word, setWord] = useState(2);
+  const onStep = useCallback((i: number) => setWord(i), []);
 
   useEffect(() => {
     const section = sectionRef.current!;
@@ -27,6 +31,7 @@ function Intro() {
           .from(q(".intro__name-kr"), { autoAlpha: 0, x: -8, duration: 0.6 }, 0.7)
           .from(q(".intro__title"), { autoAlpha: 0, y: 20, duration: 0.7 }, 0.75)
           .from(q(".intro__desc"), { autoAlpha: 0, y: 12, duration: 0.6 }, 0.9)
+          .from(q(".intro__flow"), { autoAlpha: 0, y: 24, duration: 0.8 }, 1.0)
           .from(q(".intro__scroll"), { autoAlpha: 0, duration: 0.6 }, 1.3);
       }
 
@@ -67,9 +72,14 @@ function Intro() {
             <span className="intro__name-kr">김지은</span>
           </h1>
           <p className="intro__title">
-            기획하고, 디자인하고, <em className="intro__accent">설득합니다.</em>
+            <em className={`intro__word intro__word--plan${word === 0 ? " is-on" : ""}`}>기획하고,</em>{" "}
+            <em className={`intro__word intro__word--design${word === 1 ? " is-on" : ""}`}>디자인하고,</em>{" "}
+            <em className={`intro__word intro__word--persuade${word === 2 ? " is-on" : ""}`}>설득합니다.</em>
           </p>
           <p className="intro__desc">복잡한 이야기를 한 장으로 정리합니다.</p>
+          <div className="intro__flow">
+            <FlowCard onStep={onStep} />
+          </div>
         </div>
 
         <nav className="intro__keywords" aria-label="역량 바로가기 (모바일)">

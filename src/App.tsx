@@ -7,11 +7,13 @@ import { initStepper } from "./lib/steps";
 import "./styles/reset.css";
 import "./styles/common.css";
 import Intro from "./components/Intro/Intro";
+import About from "./components/About/About";
 import ThemeToggle from "./components/ThemeToggle/ThemeToggle";
 import SideNav from "./components/SideNav/SideNav";
 import Chapter from "./components/Chapter/Chapter";
 import Archive from "./components/Archive/Archive";
 import Contact from "./components/Contact/Contact";
+import Lightbox from "./components/Lightbox/Lightbox";
 import { CHAPTERS } from "./data/chapters";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,11 +50,13 @@ function App() {
       <ThemeToggle />
       <SideNav />
       <Intro />
+      <About />
       {CHAPTERS.map((ch, i) => (
         <Chapter key={ch.id} chapter={ch} index={i} />
       ))}
       <Archive />
       <Contact />
+      <Lightbox />
     </div>
   );
 }
