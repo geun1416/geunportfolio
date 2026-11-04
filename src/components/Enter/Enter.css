@@ -1,0 +1,21 @@
+.enter { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--color-bg); transition: opacity 0.8s ease, transform 0.9s cubic-bezier(0.65, 0, 0.25, 1); }
+.enter.is-leaving { opacity: 0; transform: translateY(-3%); pointer-events: none; }
+.enter__inner { display: flex; flex-direction: column; align-items: center; text-align: center; animation: enterIn 1s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes enterIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.enter__label { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-muted); }
+.enter__name { margin-top: 14px; font-family: var(--font-en); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -0.03em; }
+.enter__thanks { margin-top: 18px; font-family: var(--font-kr); font-size: 1.05rem; color: var(--color-text-muted); }
+.enter__btn { margin-top: 44px; display: inline-flex; align-items: center; gap: 12px; padding: 14px 34px; border-radius: 999px; background: var(--color-text); color: var(--color-bg); font-family: var(--font-en); font-weight: 600; font-size: 1rem; letter-spacing: 0.04em; cursor: pointer; transition: background 0.35s ease, transform 0.35s ease; }
+.enter__btn i { font-style: normal; transition: transform 0.35s ease; }
+.enter__btn:hover { background: var(--color-accent); transform: translateY(-2px); }
+.enter__btn:hover i { transform: translateX(4px); }
+.enter__quiet { margin-top: 16px; padding: 4px 8px; background: none; font-family: var(--font-kr); font-size: 0.85rem; color: var(--color-text-muted); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; transition: color 0.3s; }
+.enter__quiet:hover { color: var(--color-text); }
+.enter__hint { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; font-family: var(--font-kr); font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; }
+.enter__bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 11px; }
+.enter__bars i { width: 2px; height: 3px; border-radius: 1px; background: var(--color-accent); animation: soundBar 1.2s ease-in-out infinite; }
+.enter__bars i:nth-child(2) { animation-delay: 0.3s; }
+.enter__bars i:nth-child(3) { animation-delay: 0.6s; }
+@media (prefers-reduced-motion: reduce) { .enter__inner, .enter__bars i { animation: none; } }
+/* 인사 화면이 떠 있는 동안 고정 메뉴는 숨김 */
+.is-entering .side-nav, .is-entering .theme-toggle, .is-entering .sound { opacity: 0; pointer-events: none; }

@@ -54,7 +54,8 @@ export const initStepper = () => {
   };
 
   const onWheel = (e: WheelEvent) => {
-    if (document.documentElement.classList.contains("lb-open")) return consume(e); // 크게 보기 중에는 이동하지 않음
+    const cl = document.documentElement.classList;
+    if (cl.contains("lb-open") || cl.contains("is-entering")) return consume(e); // 크게 보기·인사 화면 중에는 이동하지 않음
     if (!desktop.matches || e.ctrlKey) return; // 모바일·확대(ctrl+휠)는 그대로
     const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
     const now = performance.now();
@@ -66,7 +67,8 @@ export const initStepper = () => {
   };
 
   const onKey = (e: KeyboardEvent) => {
-    if (!desktop.matches || document.documentElement.classList.contains("lb-open")) return;
+    const cl = document.documentElement.classList;
+    if (!desktop.matches || cl.contains("lb-open") || cl.contains("is-entering")) return;
     const tag = (e.target as HTMLElement)?.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA") return;
     const next = ["ArrowDown", "ArrowRight", "PageDown"].includes(e.key) || (e.key === " " && !e.shiftKey);

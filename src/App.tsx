@@ -16,6 +16,7 @@ import Contact from "./components/Contact/Contact";
 import Lightbox from "./components/Lightbox/Lightbox";
 import Cursor from "./components/Cursor/Cursor";
 import Sound from "./components/Sound/Sound";
+import Enter from "./components/Enter/Enter";
 import { CHAPTERS } from "./data/chapters";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <div className="App">
+      <Enter />
       <ThemeToggle />
       <SideNav />
       <Intro />

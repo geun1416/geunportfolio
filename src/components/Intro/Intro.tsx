@@ -23,9 +23,11 @@ function Intro() {
 
     const ctx = gsap.context(() => {
       if (!reduce) {
-        // 첫 진입: 위에서 아래 순서로 살짝씩 등장
-        gsap
-          .timeline({ defaults: { ease: "power3.out" } })
+        // 첫 진입: 위에서 아래 순서로 살짝씩 등장 (인사 화면이 있으면 들어간 뒤에 재생)
+        const waiting = document.documentElement.classList.contains("is-entering");
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" }, paused: waiting, delay: waiting ? 0.35 : 0 });
+        if (waiting) window.addEventListener("site:enter", () => tl.play(), { once: true });
+        tl
           .from(q(".intro__label"), { autoAlpha: 0, y: 12, duration: 0.6 }, 0.1)
           .from(q(".intro__char"), { autoAlpha: 0, yPercent: 60, duration: 0.7, stagger: 0.04 }, 0.2)
           .from(q(".intro__name-kr"), { autoAlpha: 0, x: -8, duration: 0.6 }, 0.7)
